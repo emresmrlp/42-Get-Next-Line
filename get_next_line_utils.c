@@ -6,7 +6,7 @@
 /*   By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 21:01:42 by ysumeral          #+#    #+#             */
-/*   Updated: 2024/11/24 10:30:18 by ysumeral         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:34:51 by ysumeral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,46 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_substr(char const *str, unsigned int start, size_t len)
+char	*ft_strchr(char *str, int c)
 {
-	char	*buffer;
 	size_t	i;
 
 	i = 0;
-	if (!str || start >= ft_strlen(str))
+	if (!str)
 		return (NULL);
-	if (len > ft_strlen(str) - start)
-		len = ft_strlen(str) - start;
-	buffer = (char *)malloc(sizeof(char) * (len + 1));
+	while (*(str + i) != (char)c && *(str + i) != '\0')
+		i++;
+	if (*(str + i) == (char)c)
+		return ((char *)(str + i));
+	else
+		return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*buffer;
+	int		i;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
+		return (NULL);
+	buffer = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!buffer)
 		return (NULL);
-	while (str[start + i] && i < len)
+	i = -1;
+	while (s1[++i])
+		buffer[i] = s1[i];
+	while (s2[i - ft_strlen(s1)])
 	{
-		buffer[i] = str[start + i];
+		buffer[i] = s2[i - ft_strlen(s1)];
 		i++;
 	}
 	buffer[i] = '\0';
-	return (buffer);
+	return (free(s1), buffer);
 }
