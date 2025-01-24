@@ -1,4 +1,4 @@
-# 42 Istanbul / GET_NEXT_LINE
+# 42 Türkiye / GET_NEXT_LINE
 
 - This function enables reading lines one by one using static variables.
 
